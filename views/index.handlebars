@@ -1,16 +1,58 @@
-<h1>Movies to Watch</h1>
+<div class="container-fluid">
 
-<ul>
-  {{#each movies}}
-  <li>
-    <p>
-      {{this.id}}. {{this.movie}}
+  <div class="row">
 
-      <button data-movieid="{{this.id}}" class="delmovie">Delete Movie!</button>
-    </p>
-  </li>
-  {{/each}}
-</ul>
+    <img src="../assets/img/burger.png" alt="burgerpic">
+
+    <h1>Eat Da Burger!</h1>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-3">
+
+      <h2>Yummy Burgers to Eat!</h2>
+
+      <ul>
+        {{#each burgers}}
+          {{> burgers/burger-block devoured=false}}
+        {{/each}}
+      </ul>
+
+    </div>
+
+    <div class="col-md-3">
+
+      <h2>Burgers Already Eaten!</h2>
+
+      <ul>
+        {{#each burgers}}
+            {{> burgers/burger-gone devoured=true}}
+        {{/each}}
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+<!-- the following will be very dependant on what happens in the burger.js file
+check for classes and id's. -->
+<h2>Add a Cat</h2>
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="ca">Cat Name:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <button type="submit">Add Cat</button>
+</form>
 
 <h2>Create a Movie</h2>
 <form id="createmovie" class="button-size">
@@ -18,74 +60,6 @@
   <button type="submit">Save Movie!</button>
 </form>
 
-<h2>Update a Movie</h2>
-<form id="updatemovie" class="button-size">
-  <select name="id">
-		{{#each movies}}
-			<option value="{{this.id}}">{{this.movie}}</option>
-		{{/each}}
-	</select>
-  <textarea type="text" name="movie" placeholder="movie"></textarea>
-  <button type="submit">Update Movie!</button>
-</form>
+  </div>
 
-<script type="text/javascript">
-  $(".delmovie").on("click", function(event) {
-    var id = $(this).data("movieid");
-
-    // Send the DELETE request.
-    $.ajax("/movies/" + id, {
-      type: "DELETE"
-    }).then(
-      function() {
-        console.log("deleted id ", id);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
-  $("#createmovie").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-
-    var newMovie = {
-      plan: $("#createmovie [name=movie]").val().trim()
-    };
-
-    // Send the POST request.
-    $.ajax("/movies", {
-      type: "POST",
-      data: newMovie
-    }).then(
-      function() {
-        console.log("created new movie");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
-  $("#updatemovie").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-
-    var id = $("[name=id]").val().trim();
-
-    var updatedMovie = {
-      movie: $("#updatemovie [name=movie]").val().trim()
-    };
-
-    // Send the PUT request.
-    $.ajax("/movies/" + id, {
-      type: "PUT",
-      data: updatedMovie
-    }).then(
-      function() {
-        console.log("updated id ", id);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-</script>
+</div>

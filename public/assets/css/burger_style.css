@@ -1,0 +1,23 @@
+body {
+	background-image: url("../img/Burger_Inn_Counter.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    width: 20%;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    background-color: white;
+	width: 200px;
+	text-align: center;
+	color: black;
+	padding: 10px;
+}
