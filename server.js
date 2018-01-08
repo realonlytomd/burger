@@ -1,19 +1,24 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var methodOverride = require("method-override");
 
+var port = 3000;
 
-// require the connection.js object
+var app = express();
 
-var connection = require("./connection.js");
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static("public"));
 
-// connect to the database
+app.use(bodyParser.urlencoded({ extended: false }));
 
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
+// Set Handlebars.
+var exphbs = require("express-handlebars");
 
-  console.log("connected as id " + connection.threadId);
-});
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Import routes and give the server access to them.
+var routes = require("./controllers/burgers_controller.js");
+
+app.use("/", routes);
+
+app.listen(port);

@@ -16,11 +16,13 @@
 
     <div class="col-md-3">
 
-      <h2>Yummy Burgers to Eat!</h2>
+      <h3>Yummy Burgers to Eat</h3>
 
       <ul>
         {{#each burgers}}
-          {{> burgers/burger-block devoured=false}}
+          {{#unless devoured}}
+            {{> burgers/burger-block devour=true}}
+          {{/unless}}
         {{/each}}
       </ul>
 
@@ -28,11 +30,13 @@
 
     <div class="col-md-3">
 
-      <h2>Burgers Already Eaten!</h2>
+      <h3>Burgers Already Eaten</h3>
 
       <ul>
         {{#each burgers}}
-            {{> burgers/burger-gone devoured=true}}
+          {{#if devoured}}
+            {{> burgers/burger-block devour=false}}
+          {{/if}}
         {{/each}}
       </ul>
 
@@ -41,24 +45,16 @@
   </div>
 
   <div class="row">
-<!-- the following will be very dependant on what happens in the burger.js file
-check for classes and id's. -->
-<h2>Add a Cat</h2>
-<form class="create-form">
 
-  <div class="form-group">
-    <label for="ca">Cat Name:</label>
-    <input type="text" id="ca" name="name">
-  </div>
+    <h2>Type in a Burger You Would Like to Eat, then click Submit!</h2>
 
-  <button type="submit">Add Cat</button>
-</form>
-
-<h2>Create a Movie</h2>
-<form id="createmovie" class="button-size">
-  <textarea type="text" name="movie"></textarea>
-  <button type="submit">Save Movie!</button>
-</form>
+      <div class="form">
+        <form id="createburger" class="button-size">
+          <textarea type="text" id="newname" name="burger"></textarea>
+          <br>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
 
   </div>
 
