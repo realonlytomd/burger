@@ -82,7 +82,7 @@ var orm = {
       cb(result);
     });
   },
-  // An example of objColumnValue would be only {name: panther}, 
+  // An example of objColumnValue would be only {name: chicken}, 
   // since the column devoured is defaulted to false
   updateOne: function(table, objColumnValue, condition, cb) {
     var queryString = "UPDATE " + table;
@@ -103,5 +103,5 @@ var orm = {
   }
 };
 
-// Export the orm object for the model (cat.js).
+// Export the orm object for the model (burger.js).
 module.exports = orm;
