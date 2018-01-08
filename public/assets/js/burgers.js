@@ -7,9 +7,10 @@ $(function() {
       var newDevourState = {
         devoured: newDevour
       };
-  
+
+      var currentURL = window.location.origin;
       // Send the PUT request.
-      $.ajax("/api/burgers/" + id, {
+      $.ajax(currentURL + "/api/burgers/" + id, {
         type: "PUT",
         data: newDevourState
       }).then(
@@ -30,8 +31,9 @@ $(function() {
         devoured: false
       };
   
+      var currentURL = window.location.origin;
       // Send the POST request.
-      $.ajax("/api/burgers", {
+      $.ajax(currentURL + "/api/burgers", {
         type: "POST",
         data: newBurger
       }).then(
